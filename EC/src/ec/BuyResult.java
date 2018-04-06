@@ -34,7 +34,6 @@ public class BuyResult extends HttpServlet {
 
 			// セッションからカート情報を取得
 			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) EcHelper.cutSessionAttribute(session, "cart");
-
 			BuyDataBeans bdb = (BuyDataBeans) EcHelper.cutSessionAttribute(session, "bdb");
 
 			// 購入情報を登録

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 
 import base.DBManager;
 import beans.BuyDataBeans;
@@ -100,4 +102,32 @@ public class BuyDAO {
 		}
 	}
 
+	public ArrayList<BuyDataBeans> findByHistoryInfo(int userId) throws SQLException {
+		Connection con = null;
+		ArrayList<BuyDataBeans> historyList = new ArrayList<BuyDataBeans>();
+		try {
+			con = DBManager.getConnection();
+			String sql = "SELECT * FROM t_buy WHERE user_id = ?";
+			PreparedStatement pStmt = con.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				int totalPrice = rs.getInt("total_price");
+				int delivertMethodId = rs.getInt("delivery_method_id");
+				Date buyDate = rs.getDate("create_date");
+				BuyDataBeans bdb = new BuyDataBeans(totalPrice, delivertMethodId, buyDate);
+
+				historyList.add(bdb);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+		System.out.println("searching BuyDataBeansList by BuyID has been completed");
+		return historyList;
+	}
 }

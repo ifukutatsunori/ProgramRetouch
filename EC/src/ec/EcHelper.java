@@ -120,5 +120,10 @@ public class EcHelper {
 		return false;
 
 	}
+	public static Object setSessionAttribute(HttpSession session, String str) {
+		Object test = session.getAttribute(str);
+
+		return test;
+	}
 
 }
