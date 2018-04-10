@@ -7,13 +7,6 @@ public class BuyDetailDataBeans  implements Serializable {
 	private int buyId;
 	private int itemId;
 	private int BuyTotalPrice;
-
-	public BuyDetailDataBeans(int buyId) {
-		// TODO 自動生成されたコンストラクター・スタブ
-	}
-	public BuyDetailDataBeans() {
-		// TODO 自動生成されたコンストラクター・スタブ
-	}
 	public int getId() {
 		return id;
 	}

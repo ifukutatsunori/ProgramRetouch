@@ -178,5 +178,38 @@ public class ItemDAO {
 			}
 		}
 	}
+	public static ArrayList<ItemDataBeans> getItemBuyHistory(String buyId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		ArrayList<ItemDataBeans> itemBuyHistoryList = new ArrayList<ItemDataBeans>();
+		try {
+			con = DBManager.getConnection();
 
+			st = con.prepareStatement(
+					"SELECT m_item.id,buy_id,name,price FROM m_item "
+							+ "INNER JOIN t_buy_detail ON m_item.id = t_buy_detail.item_id "
+							+ "WHERE t_buy_detail.buy_id=?");
+			st.setString(1, buyId);
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				ItemDataBeans idb = new ItemDataBeans();
+				idb.setId(rs.getInt("id"));
+				idb.setName(rs.getString("name"));
+				idb.setPrice(rs.getInt("price"));
+				itemBuyHistoryList.add(idb);
+
+			}
+			System.out.println("searching ItemDataBeansList by BuyID has been completed");
+			return itemBuyHistoryList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
 }

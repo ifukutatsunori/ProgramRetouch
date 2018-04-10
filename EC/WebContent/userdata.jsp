@@ -81,14 +81,16 @@
 							</thead>
 							<tbody>
 								<tr>
-
-									<td class="center"><a href="UserBuyHistoryDetail?buy_id=1"
-										class="btn-floating btn waves-effect waves-light "> <i
-											class="material-icons">details</i></a></td>
-									<c:forEach var="buy" items="${historyList}">
-										<td class="center">${buy.buyDate}</td>
-										<td class="center">${buy.delivertMethodId}</td>
-										<td class="center">${buy.totalPrice}</td>
+									<c:forEach var="buy" items="${bdb}">
+										<tr>
+											<td class="center"><a
+												href="UserBuyHistoryDetail?buy_id=${buy.id}"
+												class="btn-floating btn waves-effect waves-light "> <i
+													class="material-icons">details</i></a></td>
+											<td class="center">${buy.buyDate}</td>
+											<td class="center">${buy.deliveryMethodName}</td>
+											<td class="center">${buy.totalPrice}円</td>
+										</tr>
 									</c:forEach>
 								</tr>
 							</tbody>

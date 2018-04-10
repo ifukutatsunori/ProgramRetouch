@@ -1,5 +1,6 @@
 <%@	page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@	page import="beans.ItemDataBeans"%>
 <%@ page import="beans.DeliveryMethodDataBeans"%>
 <%@ page import="beans.BuyDataBeans"%>
@@ -37,11 +38,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="center"></td>
-									<td class="center"></td>
-									<td class="center">円</td>
-								</tr>
+									<var=buy items="${bdb}">
+										<td class="center">${buy.buyDate}</td>
+										<td class="center">${buy.deliveryMethodName}</td>
+										<td class="center">${buy.totalPrice}円</td>
+										</var>
 							</tbody>
 						</table>
 					</div>
@@ -61,16 +62,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%
-									for (ItemDataBeans buyIDB : buyIDBList) {
-								%>
 								<tr>
-									<td class="center"><%=buyIDB.getName()%></td>
-									<td class="center"><%=buyIDB.getPrice()%>円</td>
+									<c:forEach var="i_buy" items="${idb}">
+										<tr>
+											<td class="center">${i_buy.name}</td>
+											<td class="center">${i_buy.price}円</td>
+										</tr>
+									</c:forEach>
 								</tr>
-								<%
-									}
-								%>
 							</tbody>
 						</table>
 					</div>
