@@ -38,11 +38,11 @@
 								</tr>
 							</thead>
 							<tbody>
-									<var=buy items="${bdb}">
-										<td class="center">${buy.buyDate}</td>
-										<td class="center">${buy.deliveryMethodName}</td>
-										<td class="center">${buy.totalPrice}円</td>
-										</var>
+								<c:forEach var="buy" items="${ubh}">
+									<td class="center">${buy.buyDateFmt}</td>
+									<td class="center">${buy.deliveryMethodName}</td>
+									<td class="center">${buy.totalPrice}円</td>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

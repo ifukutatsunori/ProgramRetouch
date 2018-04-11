@@ -28,12 +28,10 @@ public class UserBuyHistoryDetail extends HttpServlet {
 			throws ServletException, IOException {
 		String buyId = request.getParameter("buy_id");
 		try {
-			ArrayList<BuyDataBeans> bdb = BuyDAO.getUserBuyHistory(buyId);
-			 ArrayList<ItemDataBeans> idb =ItemDAO.getItemBuyHistory(buyId);
-			request.setAttribute("bdb", bdb);
+			ArrayList<BuyDataBeans> ubh = BuyDAO.getUserBuyHistory(buyId);
+			ArrayList<ItemDataBeans> idb = ItemDAO.getItemBuyHistory(buyId);
+			request.setAttribute("ubh", ubh);
 			request.setAttribute("idb", idb);
-			System.out.println(bdb);
-			System.out.println(idb);
 			request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック

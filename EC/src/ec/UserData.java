@@ -38,14 +38,14 @@ public class UserData extends HttpServlet {
 			UserDataBeans udb = session.getAttribute("returnUDB") == null ? UserDAO.getUserDataBeansByUserId(userId)
 					: (UserDataBeans) EcHelper.cutSessionAttribute(session, "returnUDB");
 
+
+
 			// 入力された内容に誤りがあったとき等に表示するエラーメッセージを格納する
 			String validationMessage = (String) EcHelper.cutSessionAttribute(session, "validationMessage");
 			request.setAttribute("validationMessage", validationMessage);
 
 			request.setAttribute("udb", udb);
-			System.out.println(udb);
 			request.setAttribute("bdb", bdb);
-			System.out.println(bdb);
 			request.getRequestDispatcher(EcHelper.USER_DATA_PAGE).forward(request, response);
 
 		} catch (Exception e) {

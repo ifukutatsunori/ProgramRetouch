@@ -128,4 +128,22 @@ public class BuyDetailDAO {
 			}
 		}
 	}
+
+	public static int getBuyId(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		con = DBManager.getConnection();
+
+		st = con.prepareStatement(
+				"SELECT buy_id FROM t_buy_detail "
+						+ "INNER JOIN t_buy ON t_buy_detail.buy_id = t_buy.id "
+						+ "WHERE t_buy.user_id = ?");
+		st.setInt(1, userId);
+		ResultSet rs = st.executeQuery();
+		int buyId = rs.getInt("buy_id");
+		if (rs.next()) {
+			rs.close();
+		}
+		return buyId;
+	}
 }
